@@ -1,4 +1,4 @@
-# Étapes du projet — Migration switch LVS
+# Étapes du projet — Migration switch
 
 Ce document détaille le déroulé chronologique de la migration, illustré par les photos prises avant et après l'intervention.
 
@@ -34,7 +34,7 @@ Le switch Aruba 2530 étant déjà présent sur site mais non opérationnel, la 
 - Création des VLANs
 - Taggage des VLANs sur les différents ports
 - Attribution d'une IP au switch (afin de pouvoir le joindre à distance une fois installé sur site)
-- Attribution d'un nom au switch (LVS_197)
+- Attribution d'un nom d'hôte au switch
 
 > [!NOTE]
 > Le détail des commandes utilisées est disponible dans **[PROCEDURE.md](./PROCEDURE.md)**.
@@ -49,16 +49,18 @@ Connexion de la fibre au switch, avec création du **VLAN 208** et taggage de ce
 
 ## Étape 5 — Mise à jour du plan de VLANs
 
-| VLAN avant | Usage | VLAN après | Statut |
+| VLAN | Nom | Usage | Statut |
 |---|---|---|---|
-| 44 | ToIP | **2** (VoIP) | Migré |
-| 207 | WiFi LVS | **210** (bornes WiFi) | Migré |
-| — | — | 4, 150, 151 | Nouveaux — non taggués pour l'instant |
-| 208 | — | 208 | Inchangé |
-| 2 | — | 2 | Inchangé |
+| 1 | `default` | VLAN par défaut | Inchangé |
+| 2 | `voip` | Téléphonie IP (fusion de l'ancien VLAN 44 ToIP) | Migré |
+| 4 | `lan_interne` | LAN interne | Créé — taggué sur le port du photocopieur |
+| 150 | `public` | Réseau public | Créé — non taggué pour l'instant |
+| 151 | `appareils_techniques` | Équipements techniques | Créé — non taggué pour l'instant |
+| 208 | `management` | Management / liaison fibre | Inchangé |
+| 210 | `bornes_wifi` | Bornes WiFi (renommage de l'ancien VLAN 207 WiFi) | Migré |
 
 > [!IMPORTANT]
-> Les VLANs 4, 150 et 151 sont bien créés sur le nouveau switch mais **ne sont pour l'instant taggués sur aucun port**, car ils n'existaient pas sur l'ancien équipement. Ils sont prévus pour des besoins à venir.
+> Les VLANs 4, 150 et 151 sont des créations n'existant pas sur l'ancien équipement. Le VLAN 4 (`lan_interne`) a été mis en service et taggué sur le port du photocopieur ; les VLANs 150 et 151 restent pour l'instant non taggués sur aucun port, en prévision de besoins à venir.
 
 **📷 Schéma récapitulatif du plan de VLANs**
 
@@ -71,7 +73,7 @@ Connexion de la fibre au switch, avec création du **VLAN 208** et taggage de ce
 Bascule du câblage de l'ancien switch vers le nouveau switch Aruba, port par port, en suivant le tableau de correspondance établi à l'étape 1.
 
 > [!IMPORTANT]
-> La bascule a été réalisée de manière à **garantir une continuité de service pendant les horaires d'ouverture du cinéma au public**.
+> La bascule a été réalisée de manière à **garantir une continuité de service pendant les horaires d'ouverture du site au public**.
 
 **📷 Baie informatique — APRÈS intervention**
 
@@ -87,7 +89,7 @@ Mise à jour de **LibreNMS** et de la documentation technique associée pour ref
 
 ## Étape 8 — Réaménagement de la banque d'accueil
 
-Gestion du débranchement puis du rebranchement des équipements de la banque d'accueil du LVS, dans le cadre du réaménagement de cet espace.
+Gestion du débranchement puis du rebranchement des équipements de la banque d'accueil, dans le cadre du réaménagement de cet espace.
 
 **📷 Banque d'accueil — AVANT**
 
@@ -99,6 +101,33 @@ Gestion du débranchement puis du rebranchement des équipements de la banque d'
 
 ---
 
+## Étape 9 — Vérifications post-migration
+
+Une fois la bascule effectuée, une série de contrôles a permis de confirmer que le nouveau switch fonctionnait correctement avant de considérer la migration terminée :
+
+- **Vérification de l'état des VLANs et des ports** :
+  ```
+  show vlan brief
+  show interfaces brief
+  ```
+  → confirmation que chaque port actif est bien rattaché au bon VLAN (comparaison avec le tableau de correspondance de l'étape 1).
+
+- **Tests de connectivité (ping)** depuis un poste de chaque VLAN critique vers sa passerelle, à titre d'exemple :
+  ```
+  ping 192.0.2.1     ! passerelle VLAN voip
+  ping 192.0.2.1     ! passerelle VLAN management
+  ```
+  *(adresses données à titre d'exemple, anonymisées)*
+
+- **Vérification à distance** : connexion SSH au switch depuis l'extérieur du site, pour confirmer qu'il reste administrable sans déplacement physique.
+
+- **Contrôle dans LibreNMS** : apparition du nouvel équipement dans la supervision, avec remontée correcte des métriques (trafic par port, état des liens).
+
+> [!NOTE]
+> Aucune anomalie n'a été relevée lors de ces vérifications. Le tableau de correspondance de l'étape 1 a servi de référence tout au long de ce contrôle, port par port.
+
+---
+
 ## Résultats
 
 - Mise en production réussie, sans coupure de service pendant les horaires d'ouverture
@@ -106,3 +135,4 @@ Gestion du débranchement puis du rebranchement des équipements de la banque d'
 - Plan de VLANs harmonisé
 - Supervision et documentation à jour
 - Réaménagement mené sans incident
+- Fonctionnement du nouveau switch confirmé par des vérifications post-migration (VLANs, connectivité, supervision)
