@@ -21,6 +21,7 @@ L'ancien switch, un **Alcatel-Lucent 52 ports (26×2)**, était en réalité con
 
 Cette migration a également été l'occasion d'harmoniser le plan de VLANs du site avec le reste du parc réseau : certains VLANs historiques ont été fusionnés ou renommés, d'autres nouvellement créés pour anticiper les besoins à venir.
 
+
 > [!INFO]
 > Ce projet a été mené en autonomie dans le cadre de mon alternance. Les identifiants réseau (IP, noms d'hôtes, versions de firmware) présentés ici sont anonymisés pour des raisons de confidentialité.
 
