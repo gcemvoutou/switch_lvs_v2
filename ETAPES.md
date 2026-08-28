@@ -47,7 +47,7 @@ Le switch Aruba 2530 étant déjà présent sur site mais non opérationnel (pas
 - Attribution d'un nom d'hôte au switch
   
 > [!NOTE]
-> Cette étape illustre un principe classique en administration réseau : un équipement "nu" n'est **jamais** administrable en SSH dès la sortie de carton, il faut d'abord une première connexion locale (console ou port dédié) pour lui donner une IP et activer les accès distants. Le détail des commandes utilisées est disponible dans **[PROCEDURE.md]**.
+> Cette étape illustre un principe classique en administration réseau : un équipement "nu" n'est **jamais** administrable en SSH dès la sortie de carton, il faut d'abord une première connexion locale (console ou port dédié) pour lui donner une IP et activer les accès distants. Le détail des commandes utilisées est disponible dans **[PROCEDURE.md] (https://github.com/gcemvoutou/switch_lvs_v2/blob/main/PROCEDURE.md)**.
 ---
 
 ## Étape 4 — Raccordement de la liaison fibre
