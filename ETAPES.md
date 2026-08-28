@@ -85,21 +85,7 @@ Mise à jour de **LibreNMS** et de la documentation technique associée pour ref
 
 ---
 
-## Étape 8 — Réaménagement de la banque d'accueil
-
-Gestion du débranchement puis du rebranchement des équipements de la banque d'accueil, dans le cadre du réaménagement de cet espace.
-
-**📷 Banque d'accueil — AVANT**
-
-`![Banque d'accueil avant](images/accueil-avant.jpg)`
-
-**📷 Banque d'accueil — APRÈS**
-
-`![Banque d'accueil après](images/accueil-apres.jpg)`
-
----
-
-## Étape 9 — Vérifications post-migration
+## Étape 8 — Vérifications post-migration
 
 Une fois la bascule effectuée, une série de contrôles a permis de confirmer que le nouveau switch fonctionnait correctement avant de considérer la migration terminée :
 
