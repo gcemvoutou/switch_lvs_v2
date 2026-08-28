@@ -52,7 +52,7 @@ Le switch Aruba 2530 étant déjà présent sur site mais non opérationnel (pas
 
 ## Étape 4 — Raccordement de la liaison fibre
 
-Connexion de la fibre au switch, avec création du **VLAN 208** et taggage de ce dernier sur le port dédié à la liaison.
+Connexion de la fibre au switch, avec création du **VLAN 208** (`management`) et taggage de ce dernier sur le port dédié à la liaison  c'est ce taggage qui permet au trafic d'administration (SSH, remontée LibreNMS) de transiter sur cette fibre jusqu'au reste de l'infrastructure. Sans ce VLAN taggué sur le bon port, le switch resterait administrable uniquement en local, ce qui aurait obligé à un déplacement sur site à chaque intervention.
 
 ---
 
