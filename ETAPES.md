@@ -86,7 +86,7 @@ Bascule du câblage de l'ancien switch vers le nouveau switch Aruba, port par po
 
 **📷 Baie informatique — APRÈS intervention**
 
-`![Baie après migration](images/baie-apres.jpg)`
+<img src="images/baie_apres.jpeg" alt="Baie avant migration" width="50%">
 
 ---
 
