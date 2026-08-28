@@ -1,6 +1,4 @@
-# Migration du switch réseau — Centre culturel LVS (Cinéma municipal)
-
-**Mairie de Saint-Égrève — Direction des Systèmes d'Information**
+# Migration d'un switch réseau
 
 ---
 
@@ -24,7 +22,7 @@ L'ancien switch, un **Alcatel-Lucent 52 ports (26×2)**, était en réalité con
 Cette migration a également été l'occasion d'harmoniser le plan de VLANs du site avec le reste du parc réseau de la mairie : certains VLANs historiques ont été fusionnés ou renommés, d'autres nouvellement créés pour anticiper les besoins à venir.
 
 > [!INFORMATION]
-> Ce projet a été mené en autonomie dans le cadre de l'alternance, avec une contrainte forte d'exploitation : le site étant un cinéma ouvert au public, l'intervention devait garantir une continuité de service pendant les horaires d'ouverture.
+> Ce projet a été mené en autonomie dans le cadre de mon alternance.
 
 ---
 
@@ -44,7 +42,7 @@ Cette migration a également été l'occasion d'harmoniser le plan de VLANs du s
 | **Modèle** | Alcatel-Lucent OS 6.6.3.509.R01 | Switch Aruba 2530 |
 | **Nom** | — | LVS_197 |
 | **Ports** | 52 ports (26×2, deux switches accolés) | — |
-| **IP de management** | 192.168.198.233 | 192.168.198.197 |
+| **IP de management** | 192.168.198.233 (ancienne) | 192.168.198.197 (nouvelle) |
 | **Masque** | — | 255.255.255.0 |
 | **Passerelle** | — | 192.168.198.1 |
 
