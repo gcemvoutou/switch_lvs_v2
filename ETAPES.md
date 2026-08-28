@@ -20,7 +20,7 @@ Face à un câblage initial réalisé "au fil de l'eau" et devenu peu lisible, u
 
 **📷 Baie informatique — AVANT intervention**
 
-<img src="images/baie_avant.jpeg" alt="Baie avant migration" width="90%">
+<img src="images/baie_avant.jpeg" alt="Baie avant migration" width="40%">
 
 ---
 
