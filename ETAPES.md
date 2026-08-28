@@ -60,8 +60,6 @@ Connexion de la fibre au switch, avec création du **VLAN 208** (`management`) e
 
 La migration a été l'occasion de nettoyer et d'harmoniser le plan de VLANs du site : certains VLANs historiques ont été conservés, d'autres fusionnés ou renumérotés, et trois nouveaux VLANs ont été créés pour anticiper des besoins à venir.
 
-
-
 [!IMPORTANT]
 > Sur les trois VLANs créés, seul le VLAN 4 (lan_interne) est actuellement taggué sur un port (le photocopieur). Les VLANs 150 (public) et 151 (appareils_techniques) restent en attente, sans port taggué, en prévision de besoins à venir.
  
