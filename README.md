@@ -23,6 +23,7 @@ Cette migration a également été l'occasion d'harmoniser le plan de VLANs du s
 
 
 > [!INFO]
+
 > Ce projet a été mené en autonomie dans le cadre de mon alternance. Les identifiants réseau (IP, noms d'hôtes, versions de firmware) présentés ici sont anonymisés pour des raisons de confidentialité.
 
 ---
