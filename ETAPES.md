@@ -1,5 +1,8 @@
 # Étapes du projet — Migration switch
 
+![Aruba](https://img.shields.io/badge/Aruba-Networking-FF8300?logo=aruba&logoColor=white)
+![Projet](https://img.shields.io/badge/Contexte-Entreprise-success)
+
 Ce document détaille le déroulé chronologique de la migration, illustré par les photos prises avant et après l'intervention.
 
 ---
