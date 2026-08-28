@@ -32,16 +32,22 @@ Repérage des VLANs actifs sur l'ancien switch à l'aide de **LibreNMS**, en com
 
 ## Étape 3 — Configuration du nouveau switch (en SSH)
 
-Le switch Aruba 2530 étant déjà présent sur site mais non opérationnel, la configuration a été réalisée en SSH :
-
+Le switch Aruba 2530 étant déjà présent sur site mais non opérationnel (pas d'IP de management configurée, SSH non activé par défaut), une première connexion **physique** a été nécessaire avant de pouvoir l'administrer à distance.
+ 
+**Connexion initiale en local :**
+ 
+- Branchement d'un câble console (RJ45/USB) entre le switch et mon poste, pour accéder à la CLI en direct sans dépendre du réseau.
+- Attribution d'une IP de management au switch (sur le VLAN d'administration), afin de pouvoir le joindre ensuite depuis le réseau.
+- Activation de l'accès SSH (génération des clés, création d'un compte d'administration).
+- 
+**Bascule en SSH — le reste de la configuration a ensuite été mené à distance :**
+ 
 - Création des VLANs
 - Taggage des VLANs sur les différents ports
-- Attribution d'une IP au switch (afin de pouvoir le joindre à distance une fois installé sur site)
 - Attribution d'un nom d'hôte au switch
-
+  
 > [!NOTE]
-> Le détail des commandes utilisées est disponible dans **[PROCEDURE.md](./PROCEDURE.md)**.
-
+> Cette étape illustre un principe classique en administration réseau : un équipement "nu" n'est **jamais** administrable en SSH dès la sortie de carton, il faut d'abord une première connexion locale (console ou port dédié) pour lui donner une IP et activer les accès distants. Le détail des commandes utilisées est disponible dans **[PROCEDURE.md]**.
 ---
 
 ## Étape 4 — Raccordement de la liaison fibre
