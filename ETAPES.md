@@ -58,22 +58,38 @@ Connexion de la fibre au switch, avec création du **VLAN 208** (`management`) e
 
 ## Étape 5 — Mise à jour du plan de VLANs
 
+**Correspondance entre l'ancien et le nouveau plan de VLANs :**
+ 
+| Ancien VLAN | Nouveau VLAN | Statut |
+|---|---|---|
+| 1 (default) | 1 (`default`) | Conservé |
+| 2 (VoIP) | 2 (`voip`) | Conservé |
+| 44 (ToIP) | — | Supprimé (fusionné dans le VLAN 2 `voip`) |
+| 207 (WiFi) | 210 (`bornes_wifi`) | Modifié (renommé / renuméroté) |
+| 208 (management) | 208 (`management`) | Conservé |
+| — | 4 (`lan_interne`) | Créé |
+| — | 150 (`public`) | Créé |
+| — | 151 (`appareils_techniques`) | Créé |
+ 
+**Détail des VLANs actifs après migration :**
+ 
 | VLAN | Nom | Usage | Statut |
 |---|---|---|---|
 | 1 | `default` | VLAN par défaut | Inchangé |
 | 2 | `voip` | Téléphonie IP (fusion de l'ancien VLAN 44 ToIP) | Migré |
-| 4 | `lan_interne` | LAN interne | Créé — taggué sur le port du photocopieur |
-| 150 | `public` | Réseau public | Créé — non taggué pour l'instant |
-| 151 | `appareils_techniques` | Équipements techniques | Créé — non taggué pour l'instant |
+| 4 | `lan_interne` | LAN interne | Créé  |
+| 150 | `public` | Réseau public | Créé |
+| 151 | `appareils_techniques` | Équipements techniques | Créé |
 | 208 | `management` | Management / liaison fibre | Inchangé |
 | 210 | `bornes_wifi` | Bornes WiFi (renommage de l'ancien VLAN 207 WiFi) | Migré |
-
+ 
 > [!IMPORTANT]
 > Les VLANs 4, 150 et 151 sont des créations n'existant pas sur l'ancien équipement. Le VLAN 4 (`lan_interne`) a été mis en service et taggué sur le port du photocopieur ; les VLANs 150 et 151 restent pour l'instant non taggués sur aucun port, en prévision de besoins à venir.
-
+ 
 **📷 Schéma récapitulatif du plan de VLANs**
-
+ 
 `![Schéma VLANs](images/schema-vlans.png)`
+ 
 
 ---
 
