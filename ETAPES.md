@@ -88,7 +88,7 @@ Connexion de la fibre au switch, avec création du **VLAN 208** (`management`) e
  
 **📷 Schéma récapitulatif du plan de VLANs**
 
-<img src="images/schema_vlans.png" alt="Schéma VLANs" width="50%">
+<img src="images/schema_vlans.png" alt="Schéma VLANs" width="60%">
  
 
 ---
