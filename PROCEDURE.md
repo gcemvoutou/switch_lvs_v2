@@ -1,50 +1,73 @@
 # Procédures techniques — Switch Aruba 2530
 
-Ce document rassemble les procédures techniques réutilisables issues du projet de migration du switch LVS. Elles peuvent être réappliquées pour toute future migration ou configuration de switch Aruba (série 2530, syntaxe ArubaOS-Switch).
+Ce document rassemble les procédures techniques réutilisables issues d'un projet de migration de switch. Elles peuvent être réappliquées pour toute future migration ou configuration de switch Aruba (série 2530, syntaxe ArubaOS-Switch) : la logique de taggage VLAN (Procédure 2) et la méthodologie de migration (Procédure 3) sont directement transposables à d'autres sites ou d'autres modèles.
 
 ---
 
-## Procédure 1 — Se connecter au switch en SSH
+## Procédure 1 — De la première connexion (console) à la configuration de base
 
-> [!NOTE]
-> Le switch doit déjà avoir une IP de management configurée, ou être accessible via le port console pour la première configuration.
+Un switch neuf n'a ni IP, ni nom, ni accès distant activé : la toute première connexion se fait obligatoirement en local, via le port console.
+
+**1. Connexion initiale en série (câble console)**
 
 ```bash
-ssh manager@<IP_DU_SWITCH>
+# Connexion via câble console (RJ45/USB ou RS232) + logiciel terminal (PuTTY, TeraTerm...)
+# Paramètres typiques : 9600 bauds, 8N1
 ```
 
-Passer en mode configuration :
+**2. Définir une IP de management** (afin de pouvoir joindre le switch à distance une fois installé sur site) :
 
 ```
 switch> enable
 switch# configure terminal
-switch(config)#
-```
-
----
-
-## Procédure 2 — Créer un VLAN
-
-```
-switch(config)# vlan <ID_VLAN>
-switch(vlan-<ID_VLAN>)# name "<NOM_DU_VLAN>"
-switch(vlan-<ID_VLAN>)# exit
+switch(config)# vlan <ID_VLAN_MANAGEMENT>
+switch(vlan-<ID_VLAN_MANAGEMENT>)# ip address <IP> <MASQUE>
+switch(vlan-<ID_VLAN_MANAGEMENT>)# exit
+switch(config)# ip default-gateway <PASSERELLE>
 ```
 
 **Exemple :**
 
 ```
-switch(config)# vlan 210
-switch(vlan-210)# name "WIFI_BORNES"
-switch(vlan-210)# exit
+switch(config)# vlan 1
+switch(vlan-1)# ip address 192.0.2.10 255.255.255.0
+switch(vlan-1)# exit
+switch(config)# ip default-gateway 192.0.2.1
+```
+
+> [!NOTE]
+> Adresses IP données à titre d'exemple (plage documentaire RFC 5737), anonymisées par rapport à la configuration réelle.
+
+**3. Donner un nom au switch** :
+
+```
+switch(config)# hostname "<NOM_DU_SWITCH>"
+```
+
+> [!NOTE]
+> Une fois l'IP de management active, le switch devient joignable à distance. Le reste de la configuration (VLANs, taggage des ports, sécurisation) peut alors être mené sans repasser par le câble console.
+
+**4. Suite de la configuration à distance**
+
+```
+switch(config)# vlan <ID_VLAN>
+switch(vlan-<ID_VLAN>)# name "<NOM_DU_VLAN>"
+switch(vlan-<ID_VLAN>)# exit
+switch(config)# password manager
+switch(config)# write memory
 ```
 
 > [!TIP]
-> Toujours donner un nom explicite au VLAN (usage, service) pour faciliter la maintenance future et éviter de dépendre uniquement du numéro d'ID.
+> Toujours donner un nom explicite au VLAN (usage, service) plutôt que de dépendre uniquement du numéro d'ID — ça évite de devoir rouvrir la documentation à chaque fois.
+
+> [!IMPORTANT]
+> `write memory` doit être exécuté après **chaque** modification. Une configuration non sauvegardée est perdue au redémarrage du switch.
+
+Bonne pratique appliquée sur ce projet : isoler l'administration sur un VLAN de management dédié, distinct des VLANs « utilisateurs ».
 
 ---
 
-## Procédure 3 — Tagger un VLAN sur un port (mode trunk / tagged)
+## Procédure 2 — Tagger un VLAN sur un port (mode trunk / tagged)
 
 Un port peut porter plusieurs VLANs "tagués" (trunk) ou un seul VLAN "untagué" (access).
 
@@ -72,64 +95,7 @@ switch(vlan-<ID_VLAN>)# untagged <PORT>
 
 ---
 
-## Procédure 4 — Attribuer une IP de management au switch
-
-```
-switch(config)# vlan <ID_VLAN_MANAGEMENT>
-switch(vlan-<ID_VLAN_MANAGEMENT>)# ip address <IP> <MASQUE>
-switch(vlan-<ID_VLAN_MANAGEMENT>)# exit
-switch(config)# ip default-gateway <PASSERELLE>
-```
-
-**Exemple :**
-
-```
-switch(config)# vlan 1
-switch(vlan-1)# ip address 192.168.198.197 255.255.255.0
-switch(vlan-1)# exit
-switch(config)# ip default-gateway 192.168.198.1
-```
-
----
-
-## Procédure 5 — Nommer le switch
-
-```
-switch(config)# hostname "<NOM_DU_SWITCH>"
-```
-
-**Exemple :**
-
-```
-switch(config)# hostname "LVS_197"
-```
-
----
-
-## Procédure 6 — Sécuriser l'accès au switch
-
-- Définir un mot de passe manager :
-
-```
-switch(config)# password manager
-```
-
-- Isoler l'administration sur un VLAN de management dédié, distinct des VLANs "utilisateurs" (bonne pratique appliquée sur ce projet).
-
----
-
-## Procédure 7 — Sauvegarder la configuration
-
-```
-switch(config)# write memory
-```
-
-> [!IMPORTANT]
-> Toujours sauvegarder la configuration après chaque modification. Une config non sauvegardée est perdue au redémarrage du switch.
-
----
-
-## Procédure 8 — Méthodologie de migration de switch (câblage)
+## Procédure 3 — Méthodologie de migration de switch (câblage)
 
 1. **Repérer** chaque port de l'ancien switch : prise murale associée, VLAN actif, équipement branché.
 2. **Consigner** ces informations dans un tableau de correspondance (port ancien → prise murale → VLAN → port prévu sur le nouveau switch).
