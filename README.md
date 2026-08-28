@@ -1,4 +1,6 @@
 # Migration d'un switch réseau
+![Aruba](https://img.shields.io/badge/Aruba-Networking-FF8300?logo=aruba&logoColor=white)
+![Projet](https://img.shields.io/badge/Contexte-Entreprise-success)
 
 ---
 
