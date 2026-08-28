@@ -60,14 +60,17 @@ Connexion de la fibre au switch, avec création du **VLAN 208** (`management`) e
 
 La migration a été l'occasion de nettoyer et d'harmoniser le plan de VLANs du site : certains VLANs historiques ont été conservés, d'autres fusionnés ou renumérotés, et trois nouveaux VLANs ont été créés pour anticiper des besoins à venir.
 
-Le VLAN 1 (default), le VLAN 2 (voip) et le VLAN 208 (management) ont été conservés sans modification. L'ancien VLAN 44 (ToIP) a été supprimé et fusionné dans le VLAN 2 voip. Le VLAN WiFi, historiquement le 207, a été renommé et renuméroté en VLAN 210 (bornes_wifi). Enfin, trois VLANs ont été créés : le 4 (lan_interne), le 150 (public) et le 151 (appareils_techniques).
+
 
 [!IMPORTANT]
-Sur les trois VLANs créés, seul le VLAN 4 (lan_interne) est actuellement taggué sur un port (le photocopieur). Les VLANs 150 (public) et 151 (appareils_techniques) restent en attente, sans port taggué, en prévision de besoins à venir.
+> Sur les trois VLANs créés, seul le VLAN 4 (lan_interne) est actuellement taggué sur un port (le photocopieur). Les VLANs 150 (public) et 151 (appareils_techniques) restent en attente, sans port taggué, en prévision de besoins à venir.
  
 **📷 Schéma récapitulatif du plan de VLANs**
 
 <img src="images/schema_vlans.png" alt="Schéma VLANs" width="60%">
+
+[!NOTE]
+> Le VLAN 1 (default), le VLAN 2 (voip) et le VLAN 208 (management) ont été conservés sans modification. L'ancien VLAN 44 (ToIP) a été supprimé et fusionné dans le VLAN 2 voip. Le VLAN WiFi, historiquement le 207, a été renommé et renuméroté en VLAN 210 (bornes_wifi). Enfin, trois VLANs ont été créés : le 4 (lan_interne), le 150 (public) et le 151 (appareils_techniques).
  
 
 ---
