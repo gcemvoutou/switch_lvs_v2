@@ -87,8 +87,8 @@ Connexion de la fibre au switch, avec création du **VLAN 208** (`management`) e
 > Les VLANs 4, 150 et 151 sont des créations n'existant pas sur l'ancien équipement. Le VLAN 4 (`lan_interne`) a été mis en service et taggué sur le port du photocopieur ; les VLANs 150 et 151 restent pour l'instant non taggués sur aucun port, en prévision de besoins à venir.
  
 **📷 Schéma récapitulatif du plan de VLANs**
- 
-`![Schéma VLANs](images/schema-vlans.png)`
+
+<img src="images/schema_vlans.png" alt="Schéma VLANs" width="50%">
  
 
 ---
