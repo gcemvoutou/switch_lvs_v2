@@ -1,5 +1,8 @@
 # Procédures techniques — Switch Aruba 2530
 
+![Aruba](https://img.shields.io/badge/Aruba-Networking-FF8300?logo=aruba&logoColor=white)
+![Projet](https://img.shields.io/badge/Contexte-Entreprise-success)
+
 Ce document rassemble les procédures techniques réutilisables issues d'un projet de migration de switch. Elles peuvent être réappliquées pour toute future migration ou configuration de switch Aruba (série 2530, syntaxe ArubaOS-Switch) : la logique de taggage VLAN (Procédure 2) et la méthodologie de migration (Procédure 3) sont directement transposables à d'autres sites ou d'autres modèles.
 
 ---
