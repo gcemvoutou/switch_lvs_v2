@@ -15,9 +15,6 @@ Face à un câblage initial réalisé "au fil de l'eau" et devenu peu lisible, u
 - identifier le VLAN actif sur chaque port,
 - planifier un nouveau branchement propre et ordonné en assignant à chaque prise un nouveau port sur le nouveau matériel.
 
-> [!NOTE]
-> Le tableau de repérage complet est disponible en annexe (`images/tableau-correspondance.xlsx` ou équivalent).
-
 **📷 Baie informatique — AVANT intervention**
 
 <img src="images/baie_avant.jpeg" alt="Baie avant migration" width="50%">
