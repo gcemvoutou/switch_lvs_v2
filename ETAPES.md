@@ -91,6 +91,8 @@ Une fois la bascule effectuée, une série de contrôles a permis de confirmer q
   show vlan brief
   show interfaces brief
   ```
+  <img src="images/show_vlan.png" alt="Show vlan" width="50%">
+  
   → confirmation que chaque port actif est bien rattaché au bon VLAN (comparaison avec le tableau de correspondance de l'étape 1).
 
 - **Tests de connectivité (ping)** depuis un poste de chaque VLAN critique vers sa passerelle, à titre d'exemple :
